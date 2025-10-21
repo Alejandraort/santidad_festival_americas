@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario del Festival</title>
+    <style>
+        /* Fondo con imagen del santo */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('santo.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        /* Contenedor del formulario */
+        .form-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fdf3e7; /* color crema */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+
+        /* Estilos del formulario */
+        form label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        form input, form select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            width: 100%;
+            background-color: #f4a261;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #e76f51;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Registro para el Festival</h1>
+        <form action="https://formspree.io/f/abcd1234" method="POST">
+            <label for="nombre">¿Cuál es tu nombre?</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="edad">¿Cuál es tu edad?</label>
+            <input type="number" id="edad" name="edad" required>
+
+            <label>¿Perteneces a alguna comunidad?</label>
+            <select id="comunidad-pregunta" name="comunidad-pregunta" required>
+                <option value="">--Selecciona--</option>
+                <option value="sí">Sí</option>
+                <option value="no">No</option>
+            </select>
+
+            <div id="comunidad-detalle" style="display:none;">
+                <label for="comunidad">¿Cuál es la comunidad a la que perteneces?</label>
+                <input type="text" id="comunidad" name="comunidad">
+            </div>
+
+            <div id="santo-detalle" style="display:none;">
+                <label for="santo">¿De qué santo te vas a disfrazar?</label>
+                <input type="text" id="santo" name="santo">
+            </div>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <script>
+        // Mostrar campos según respuestas
+        const comunidadPregunta = document.getElementById('comunidad-pregunta');
+        const comunidadDetalle = document.getElementById('comunidad-detalle');
+        const santoDetalle = document.getElementById('santo-detalle');
+
+        comunidadPregunta.addEventListener('change', function() {
+            if (this.value === 'sí') {
+                comunidadDetalle.style.display = 'block';
+                santoDetalle.style.display = 'block';
+                document.getElementById('comunidad').required = true;
+                document.getElementById('santo').required = true;
+            } else {
+                comunidadDetalle.style.display = 'none';
+                santoDetalle.style.display = 'none';
+                document.getElementById('comunidad').required = false;
+                document.getElementById('santo').required = false;
+            }
+        });
+    </script>
+</body>
+</html>
